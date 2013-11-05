@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mobile Web App</title>
+        <meta name="description"      content="A mobile web app meant to test mobile web app technologies">
+        <meta name="author"           content="Naoise Golden">
+        <!-- Fit the viewport to the device, and disable pinch zooming -->
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html -->
+        <link rel="shortcut icon"                                href="assets/images/touch/apple-touch-icon.png">
+        <link rel="apple-touch-icon-precomposed"                 href="assets/images/touch/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"   href="assets/images/touch/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76"   href="assets/images/touch/apple-touch-icon-76x76.png">   <!-- ipad -->
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="assets/images/touch/apple-touch-icon-120x120.png"> <!-- iphone retina -->
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="assets/images/touch/apple-touch-icon-152x152.png"> <!-- ipad retina -->
+
+        <!-- Attribution -->
+        <link rel="author" href="https://plus.google.com/103700467070879436555/posts">
+
+        <!-- For iOS web apps. https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Mobile Web App">
+        <meta name="format-detection" content="telephone=no">
+
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+        <!--
+        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+        -->
+
+        <link rel="stylesheet" href="assets/styles/application.css">
+    </head>
+    <body>
+
+        Hello Mobile World.
+
+        <!-- Scripts -->
+        <script src="assets/js/application.js"></script>
+    </body>
+</html>
