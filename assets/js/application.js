@@ -49,9 +49,9 @@
   }
 
   function deviceMotionListener(event) {
-    ax = event.accelerationIncludingGravity.x;
-    ay = event.accelerationIncludingGravity.y;
-    az = event.accelerationIncludingGravity.z;
+    ax = event.acceleration.x;
+    ay = event.acceleration.y;
+    az = event.acceleration.z;
     rotation = event.rotationRate;
     if (rotation !== null) {
       arAlpha = Math.round(rotation.alpha);
