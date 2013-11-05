@@ -3,7 +3,11 @@
   var orientationContainer = document.getElementById("orientation-container");
 
   // Event listeners
-  window.addEventListener("orientationchange", orientationChangeListener);
+
+  // Detect whether device supports orientationchange event, otherwise fall back to
+  // the resize event.
+  var orientationEvent = "onorientationchange" in window ? "orientationchange" : "resize";
+  window.addEventListener(orientationEvent, orientationChangeListener);
 
   /* init
    * Initialiazies stuff.
