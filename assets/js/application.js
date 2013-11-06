@@ -35,7 +35,7 @@
    */
   function showData(message, container) {
     container.innerHTML = message;
-    console.log(message);
+    // console.log(message);
   }
 
   // Note that "orientationchange" and window.orientation are unprefixed in the following
@@ -49,9 +49,9 @@
   }
 
   function deviceMotionListener(event) {
-    ax = event.acceleration.x;
-    ay = event.acceleration.y;
-    az = event.acceleration.z;
+    ax = event.acceleration.x.toFixed(2);
+    ay = event.acceleration.y.toFixed(2);
+    az = event.acceleration.z.toFixed(2);
     rotation = event.rotationRate;
     if (rotation !== null) {
       arAlpha = Math.round(rotation.alpha);
