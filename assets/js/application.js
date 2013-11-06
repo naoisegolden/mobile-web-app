@@ -10,7 +10,10 @@
   var errorContainer        = document.getElementById("error-container");
 
   // Global variables
-  var pixelDensity = (window.devicePixelRatio >= 2) ? 2 : 1;
+  var pixelDensity   = (window.devicePixelRatio >= 2) ? 2 : 1;
+  var viewportWidth  = window.innerWidth;
+  var viewportHeight = window.innerHeight;
+  var viewportRatio  = viewportWidth/viewportHeight;
 
   // Event listeners
 
@@ -29,8 +32,10 @@
   }
   // Geolocation
   // https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/GettingGeographicalLocations/GettingGeographicalLocations.html
-  var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
-  navigator.geolocation.getCurrentPosition(geolocationListener, geolocationError);
+  function getPosition() {
+    var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
+    navigator.geolocation.getCurrentPosition(geolocationListener, geolocationError);
+  }
 
   /* init
    * Initialiazies stuff.
@@ -62,7 +67,8 @@
    */
   function jsonToUrl(data) {
     var params = Object.keys(data).map(function(k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+      // return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+      return k + '=' + data[k];
     }).join('&');
 
     return params;
@@ -71,6 +77,7 @@
   // Note that "orientationchange" and window.orientation are unprefixed in the following
   // code although this API is still vendor-prefixed browsers implementing it.
   function orientationChangeListener() {
+    getPosition();
     showData("the orientation of the device is now " + window.orientation, orientationContainer);
   }
 
@@ -121,6 +128,7 @@
                   ' (+/- ' + crd.accuracy + ' m.)';
 
     refreshMap(crd.latitude, crd.longitude);
+    setBackgroundMap(crd.latitude, crd.longitude);
     showData(message, geolocationContainer);
   }
 
@@ -129,6 +137,24 @@
     var coords = latitude + "," + longitude,
         src = "https://maps.googleapis.com/maps/api/staticmap?markers=color:blue%7C" + coords + "&zoom=14&size=400x400&scale=" + pixelDensity + "&sensor=false";
     mapImage.src = src;
+  }
+
+  function setBackgroundMap(latitude, longitude) {
+    var maxImageWidth  = Math.round( 640 * (viewportRatio >= 1 ? 1 : 1/viewportRatio) );
+    var maxImageHeight = Math.round( 640 * (viewportRatio <= 1 ? 1 : 1/viewportRatio) );
+    var options = {
+      markers : latitude + ',' + longitude,
+      size    : maxImageWidth + 'x' + maxImageHeight, // viewportWidth + 'x' + viewportHeight, not possible with free API
+      scale   : pixelDensity,
+      zoom    : '14',
+      sensor  : false
+    };
+
+    document.body.style.backgroundImage = "url(" + googleStaticMapSrc(options) + ")";
+  }
+
+  function googleStaticMapSrc(options) {
+    return "https://maps.googleapis.com/maps/api/staticmap?" + jsonToUrl(options);
   }
 
   init();
