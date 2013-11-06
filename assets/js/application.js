@@ -9,6 +9,9 @@
   var mapImage              = document.getElementById("map-image");
   var errorContainer        = document.getElementById("error-container");
 
+  // Global variables
+  var pixelDensity = (window.devicePixelRatio >= 2) ? 2 : 1;
+
   // Event listeners
 
   // Detect whether device supports orientationchange event, otherwise fall back to
@@ -112,7 +115,7 @@
   function refreshMap(latitude, longitude) {
     console.log("refresh map");
     var coords = latitude + "," + longitude,
-        src = "https://maps.googleapis.com/maps/api/staticmap?markers=color:blue%7C" + coords + "&zoom=14&size=400x400&sensor=false";
+        src = "https://maps.googleapis.com/maps/api/staticmap?markers=color:blue%7C" + coords + "&zoom=14&size=400x400&scale=" + pixelDensity + "&sensor=false";
     mapImage.src = src;
   }
 

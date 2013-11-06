@@ -13,3 +13,8 @@ body {
 .error {
   color: red;
 }
+
+.map-image {
+  height: 400px;
+  width: 400px;
+}
