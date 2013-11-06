@@ -11,9 +11,6 @@
 
   // Global variables
   var pixelDensity   = (window.devicePixelRatio >= 2) ? 2 : 1;
-  var viewportWidth  = window.innerWidth;
-  var viewportHeight = window.innerHeight;
-  var viewportRatio  = viewportWidth/viewportHeight;
 
   // Event listeners
 
@@ -140,7 +137,10 @@
   }
 
   function setBackgroundMap(latitude, longitude) {
-    var maxImageWidth  = Math.round( 640 * (viewportRatio >= 1 ? 1 : 1/viewportRatio) );
+    var viewportWidth  = window.innerWidth;
+    var viewportHeight = window.innerHeight;
+    var viewportRatio  = viewportWidth/viewportHeight;
+    var maxImageWidth  = Math.round( 640 * (viewportRatio >= 1 ? 1 : viewportRatio) );
     var maxImageHeight = Math.round( 640 * (viewportRatio <= 1 ? 1 : 1/viewportRatio) );
     var options = {
       markers : latitude + ',' + longitude,
