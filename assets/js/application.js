@@ -56,6 +56,18 @@
     throw new Error(message);
    }
 
+
+  /* jsonToUrl
+   * Transforms JSON to URL params string
+   */
+  function jsonToUrl(data) {
+    var params = Object.keys(data).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+    }).join('&');
+
+    return params;
+  }
+
   // Note that "orientationchange" and window.orientation are unprefixed in the following
   // code although this API is still vendor-prefixed browsers implementing it.
   function orientationChangeListener() {
