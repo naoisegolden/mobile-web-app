@@ -5,6 +5,9 @@
   var accelerationContainer = document.getElementById("acceleration-container");
   var rotationContainer     = document.getElementById("rotation-container");
   var rotationContainer2    = document.getElementById("rotation-container-2");
+  var geolocationContainer  = document.getElementById("geolocation-container");
+  var mapImage              = document.getElementById("map-image");
+  var errorContainer        = document.getElementById("error-container");
 
   // Event listeners
 
@@ -21,6 +24,10 @@
     window.addEventListener("devicemotion"     , deviceMotionListener);
     window.addEventListener("deviceorientation", deviceOrientationListener);
   }
+  // Geolocation
+  // https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/GettingGeographicalLocations/GettingGeographicalLocations.html
+  var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
+  navigator.geolocation.getCurrentPosition(geolocationListener, geolocationError);
 
   /* init
    * Initialiazies stuff.
@@ -37,6 +44,14 @@
     container.innerHTML = message;
     // console.log(message);
   }
+
+  /* showError
+   * Generic function for logging errors in the console.
+   */
+   function showError(message) {
+    showData(message, errorContainer);
+    throw new Error(message);
+   }
 
   // Note that "orientationchange" and window.orientation are unprefixed in the following
   // code although this API is still vendor-prefixed browsers implementing it.
@@ -67,6 +82,38 @@
     beta  = Math.round(event.beta);
     gamma = Math.round(event.gamma);
     showData("rotation: " + alpha + ", " + beta + ", " + gamma, rotationContainer2);
+  }
+
+
+  /* geolocationError
+   *
+   * @param {PositionError} error
+   */
+  function geolocationError(error) {
+    showError(error.message);
+  }
+
+  /* geolocationListener
+   *
+   * @param {Position} position
+   */
+  function geolocationListener(position) {
+    var crd = position.coords;
+
+    var message = 'Your current position is:' +
+                  ' Lat: ' + crd.latitude +
+                  ' Long: ' + crd.longitude +
+                  ' (+/- ' + crd.accuracy + ' m.)';
+
+    refreshMap(crd.latitude, crd.longitude);
+    showData(message, geolocationContainer);
+  }
+
+  function refreshMap(latitude, longitude) {
+    console.log("refresh map");
+    var coords = latitude + "," + longitude,
+        src = "https://maps.googleapis.com/maps/api/staticmap?markers=color:blue%7C" + coords + "&zoom=14&size=400x400&sensor=false";
+    mapImage.src = src;
   }
 
   init();
