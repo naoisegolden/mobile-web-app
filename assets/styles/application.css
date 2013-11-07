@@ -9,6 +9,10 @@ body {
   width: 100%;
   overflow: auto;
   background-size: cover;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-text-size-adjust: none;
 }
 
 .error {
