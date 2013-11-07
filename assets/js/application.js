@@ -144,7 +144,7 @@
     var maxImageHeight = Math.round( 640 * (viewportRatio <= 1 ? 1 : 1/viewportRatio) );
     var options = {
       markers : latitude + ',' + longitude,
-      size    : maxImageWidth + 'x' + maxImageHeight, // viewportWidth + 'x' + viewportHeight, not possible with free API
+      size    : maxImageWidth + 'x' + maxImageHeight, // viewportWidth*viewportRatio + 'x' + viewportHeight*viewportRatio, not possible with free API
       scale   : pixelDensity,
       zoom    : '14',
       sensor  : false
