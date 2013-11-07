@@ -23,9 +23,12 @@
   window.addEventListener("gesturechange", gestureListener);
   window.addEventListener("gestureend"   , gestureListener);
   // Device motion
+  // http://www.peterfriese.de/how-to-use-the-gyroscope-of-your-iphone-in-a-mobile-web-app/
   if (window.DeviceMotionEvent !== undefined) {
-    window.addEventListener("devicemotion"     , deviceMotionListener);
-    window.addEventListener("deviceorientation", deviceOrientationListener);
+    window.addEventListener("devicemotion", deviceMotionListener);      // Accelerometer
+  }
+  if (window.DeviceOrientationEvent !== undefined) {
+    window.addEventListener("deviceorientation", deviceOrientationListener); // Gyroscope
   }
   // Geolocation
   // https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/GettingGeographicalLocations/GettingGeographicalLocations.html
