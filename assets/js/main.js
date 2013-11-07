@@ -8,6 +8,7 @@ var App = (function() {
   var geolocationContainer  = document.getElementById("geolocation-container");
   var mapImage              = document.getElementById("map-image");
   var errorContainer        = document.getElementById("error-container");
+  var jobsContianer         = document.getElementById("jobs-container");
 
   // Global variables
   var pixelDensity = (window.devicePixelRatio >= 2) ? 2 : 1;
@@ -35,6 +36,19 @@ var App = (function() {
   function getPosition() {
     var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
     navigator.geolocation.getCurrentPosition(geolocationListener, geolocationError);
+  }
+
+  /* processData
+   * Takes the "postings" JSON reponse and prints it.
+   * @param {Object} data
+   */
+  function processData(data) {
+    if (data === undefined || data.collection === undefined) return;
+    data.collection.forEach(function(job) {
+      var jobElement = document.createElement("li");
+      jobElement.innerHTML = job.title;
+      jobsContianer.appendChild(jobElement);
+    });
   }
 
   /* showData
@@ -154,6 +168,7 @@ var App = (function() {
   return {
     run: function(data) {
       getPosition();
+      if (data !== undefined) processData(data);
     }
   };
 })();
