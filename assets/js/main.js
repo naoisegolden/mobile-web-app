@@ -1,4 +1,4 @@
-(function() {
+var App = (function() {
   // DOM elements
   var orientationContainer  = document.getElementById("orientation-container");
   var gestureContainer      = document.getElementById("gesture-container");
@@ -35,13 +35,6 @@
   function getPosition() {
     var options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
     navigator.geolocation.getCurrentPosition(geolocationListener, geolocationError);
-  }
-
-  /* init
-   * Initialiazies stuff.
-   */
-  function init() {
-    getPosition();
   }
 
   /* showData
@@ -158,5 +151,9 @@
     return "https://maps.googleapis.com/maps/api/staticmap?" + jsonToUrl(options);
   }
 
-  init();
+  return {
+    run: function(data) {
+      getPosition();
+    }
+  };
 })();
