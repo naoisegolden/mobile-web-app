@@ -10,7 +10,7 @@
   var errorContainer        = document.getElementById("error-container");
 
   // Global variables
-  var pixelDensity   = (window.devicePixelRatio >= 2) ? 2 : 1;
+  var pixelDensity = (window.devicePixelRatio >= 2) ? 2 : 1;
 
   // Event listeners
 
