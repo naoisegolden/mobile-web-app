@@ -41,8 +41,7 @@
    * Initialiazies stuff.
    */
   function init() {
-    orientationChangeListener();
-    gestureListener(undefined);
+    getPosition();
   }
 
   /* showData
@@ -77,7 +76,6 @@
   // Note that "orientationchange" and window.orientation are unprefixed in the following
   // code although this API is still vendor-prefixed browsers implementing it.
   function orientationChangeListener() {
-    getPosition();
     showData("the orientation of the device is now " + window.orientation, orientationContainer);
   }
 
@@ -127,7 +125,7 @@
                   ' Long: ' + crd.longitude +
                   ' (+/- ' + crd.accuracy + ' m.)';
 
-    refreshMap(crd.latitude, crd.longitude);
+    // refreshMap(crd.latitude, crd.longitude);
     setBackgroundMap(crd.latitude, crd.longitude);
     showData(message, geolocationContainer);
   }
@@ -143,8 +141,8 @@
     var viewportWidth  = window.innerWidth;
     var viewportHeight = window.innerHeight;
     var viewportRatio  = viewportWidth/viewportHeight;
-    var maxImageWidth  = Math.round( 640 * (viewportRatio >= 1 ? 1 : viewportRatio) );
-    var maxImageHeight = Math.round( 640 * (viewportRatio <= 1 ? 1 : 1/viewportRatio) );
+    var maxImageWidth  = 640; // Math.round( 640 * (viewportRatio >= 1 ? 1 : viewportRatio) );
+    var maxImageHeight = 640; // Math.round( 640 * (viewportRatio <= 1 ? 1 : 1/viewportRatio) );
     var options = {
       markers : latitude + ',' + longitude,
       size    : maxImageWidth + 'x' + maxImageHeight, // viewportWidth*viewportRatio + 'x' + viewportHeight*viewportRatio, not possible with free API
